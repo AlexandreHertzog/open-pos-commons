@@ -1,0 +1,5 @@
+#include "../include/openpos-commons/Product.h"
+
+class ProductController {
+    SLOT(void addProduct(const openpos::Product &p));
+};
