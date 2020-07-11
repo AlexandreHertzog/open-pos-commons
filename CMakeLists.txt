@@ -17,8 +17,6 @@ set(headers ${header_dir}/Product.h)
 set(source_dir src/openpos-commons)
 set(sources ${source_dir}/Product.cpp)
 
-set(reps rep/ProductController.rep)
-
 set(tool_dest "bin")
 set(include_dest "include/openpos-commons-${PROJECT_VERSION}")
 set(main_lib_dest "lib/openpos-commons-${PROJECT_VERSION}")
@@ -35,11 +33,9 @@ target_include_directories(openposcommons
         PRIVATE
         ${header_dir} ${source_dir})
 
-install(TARGETS openposcommons EXPORT openpos-commons DESTINATION ${tool_dest})
-install(FILES ${headers} DESTINATION "${include_dest}")
-
 configure_file(cmake/openpos-commons-config-version.cmake.in ${CMAKE_CURRENT_BINARY_DIR}/openpos-commons-config-version.cmake @ONLY)
-install(FILES cmake/openpos-commons-config.cmake ${CMAKE_CURRENT_BINARY_DIR}/openpos-commons-config-version.cmake DESTINATION ${main_lib_dest})
 
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(TARGETS openposcommons EXPORT openpos-commons DESTINATION ${tool_dest})
+install(DIRECTORY ${header_dir} DESTINATION "${include_dest}")
+install(FILES cmake/openpos-commons-config.cmake ${CMAKE_CURRENT_BINARY_DIR}/openpos-commons-config-version.cmake DESTINATION ${main_lib_dest})
 install(EXPORT openpos-commons DESTINATION "${lib_dest}")
